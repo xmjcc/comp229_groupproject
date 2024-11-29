@@ -1,0 +1,93 @@
+.survey-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .survey-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+  }
+  
+  .survey-header .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .survey-header .logo img {
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .survey-header .logo h1 {
+    font-size: 1.5rem;
+    color: #007bff;
+  }
+  
+  .survey-list-container {
+    margin: 30px auto;
+    max-width: 800px;
+  }
+  
+  .survey-list-container h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .survey-list-container p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .survey-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .survey-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .survey-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .survey-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .survey-card .btn {
+    display: block;
+    width: 80%; 
+    margin: 0 auto; 
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px; 
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem; 
+    text-align: center;
+  }
+  
+  .survey-card .btn:hover {
+    background-color: #0056b3;
+  }
+  

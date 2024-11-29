@@ -1,0 +1,133 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f5f5f5;
+    color: #333;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    background: #007bff;
+    color: #fff;
+    padding: 20px 40px;  
+    position: relative;  
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    max-width: 50px; 
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .nav-bar ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; 
+    padding: 0;
+  }
+  
+  .nav-bar li {
+    margin: 0 15px;
+  }
+  
+  .nav-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-bar a:hover {
+    background: #fff;
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .nav-bar a:active {
+    background: #0056b3;
+    color: #fff;
+    border-color: #0056b3;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 60px;
+    background: #007bff;
+    color: #fff;
+  }
+  
+  .btn {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background: #fff;
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn:active {
+    background: #0056b3;
+    color: #fff;
+    border-color: #0056b3;
+  }
+  
+  .features {
+    background: #f8f9fa;
+    color: #333;
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .features-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  footer {
+    background: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;  
+  }
+  
