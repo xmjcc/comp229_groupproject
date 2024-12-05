@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Auth.css';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -18,30 +22,51 @@ const Signup = () => {
     return passwordRegex.test(password);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     let valid = true;
 
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-      valid = false;
-    } else {
-      setEmailError('');
-    }
+    // temporalily remove to reduce complexcity
 
-    if (!validatePassword(password)) {
-      setPasswordError(
-        'Password must be at least 8 characters long and include an uppercase letter, a number, and a special character (!@#$%^&*).'
-      );
-      valid = false;
-    } else {
-      setPasswordError('');
-    }
+    // if (!validateEmail(email)) {
+    //   setEmailError('Please enter a valid email address.');
+    //   valid = false;
+    // } else {
+    //   setEmailError('');
+    // }
 
+    // if (!validatePassword(password)) {
+    //   setPasswordError(
+    //     'Password must be at least 8 characters long and include an uppercase letter, a number, and a special character (!@#$%^&*).'
+    //   );
+    //   valid = false;
+    // } else {
+    //   setPasswordError('');
+    // }
     if (valid) {
       console.log('Form submitted:', { email, password });
     }
-  };
+
+    // added my benjamin wang Dec. 05
+        try {
+          // Make a POST request to the server for the server to create a new user
+          const response = await axios.post('/api/users', {
+            email: email,
+            password: password,
+          });
+
+        console.log("sign up succefully and return to sign in page")    
+          // Redirect to the dashboard or home page
+          navigate('/signin'); // Redirect to dashboard
+        } catch (err) {
+          // Handle error: invalid credentials or other issues
+          setError(err.response ? err.response.data.error : err.message || 'Could not sign in');
+
+        }
+
+        
+      };
+
 
   return (
     <div className="auth-page">
@@ -90,5 +115,6 @@ const Signup = () => {
     </div>
   );
 };
+
 
 export default Signup;

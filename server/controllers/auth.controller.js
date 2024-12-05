@@ -13,7 +13,7 @@ const signin = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
 
     const token = jwt.sign({ _id: user._id }, config.jwtSecret);
-    res.cookie('t', token, { expire: new Date() + 9999 });
+    res.cookie('t', token, { expire: new Date() + 4*60*60*1000 });
     return res.json({
       token,
       user: { _id: user._id, name: user.name, email: user.email },
@@ -36,6 +36,7 @@ const requireSignin = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, config.jwtSecret);
+
     req.auth = decoded;
     next();
   } catch (err) {

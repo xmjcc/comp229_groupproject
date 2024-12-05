@@ -1,14 +1,48 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import '../styles/Auth.css';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
+
+  
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+      const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
+      const [error, setError] = useState('');
+    
+      const [loading, setLoading] = useState(false);
+      const navigate = useNavigate();
+      // Handle form submission
+      const handleSubmit = async (e) => {
+        
+    
+        try {
+          // Make a POST request to the server for sign-in
+          const response = await axios.post('/api/auth/signin', {
+            email: email,
+            password: password,
+          });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+          console.log("sign in succesfuly");
+    
+          // On successful login, store the JWT token (you can store it in localStorage or cookies)
+          localStorage.setItem('jwt_token', response.data.token);
+    
+          // Optionally, store user data
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+    
+          // Redirect to the dashboard or home page
+          navigate('/'); // Redirect to dashboard
+        } catch (err) {
+          // Handle error: invalid credentials or other issues
+          setError(err.response ? err.response.data.error : err.message || 'Could not sign in');
+
+        }
+      };
+
+  
+
 
   return (
     <div className="auth-page">
@@ -41,7 +75,9 @@ const Login = () => {
             placeholder="Enter your password"
           />
           
-          <button type="submit" className="btn">Sign In</button>
+          <button type="submit" className="btn" disabled={loading}>
+          {loading ? 'Signing In...' : 'Sign In'}
+          </button>
         </form>
 
         <p className="auth-switch">

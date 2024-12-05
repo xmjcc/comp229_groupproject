@@ -2,8 +2,14 @@ import Survey from '../models/survey.model.js';
 
 const create = async (req, res) => {
   const survey = new Survey(req.body);
+
+  console.log('mytest2',req.auth._id);
+  // console.log("Type of req.auth._id:", typeof req.auth._id);
   survey.createdBy = req.auth._id;
+   
   try {
+    
+
     await survey.save();
     return res.status(201).json({
       message: 'Survey successfully created',
@@ -17,7 +23,8 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
   try {
-    let surveys = await Survey.find().populate('createdBy', 'name email');
+    // let surveys = await Survey.find().populate('createdBy', 'name email');
+    let surveys = await Survey.find();
     res.json(surveys);
   } catch (err) {
     return res.status(400).json({

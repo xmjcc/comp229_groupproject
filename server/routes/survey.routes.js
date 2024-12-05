@@ -10,8 +10,12 @@ router.route('/')
 
   router.route('/:surveyId')
   .get(surveyCtrl.read)
-  .put(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.update)
-  .delete(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.remove);
+  // .put(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.update)
+  .put(surveyCtrl.update)
+
+
+  // .delete(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.remove);
+  .delete(surveyCtrl.remove);
 
 
 router.param('surveyId', surveyCtrl.surveyByID);

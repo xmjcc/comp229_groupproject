@@ -9,9 +9,16 @@ router.route('/')
   .post(userCtrl.create);
 
 router.route('/:userId')
-  .get(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.read)
-  .put(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.update)
-  .delete(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.remove);
+  // .get(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.read)
+  // .put(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.update)
+  // .delete(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.remove);
+  .get(userCtrl.read)
+  .put(userCtrl.update)
+  .delete(userCtrl.remove);
+
+
+
+
 
 router.param('userId', userCtrl.userByID);
 
