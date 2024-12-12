@@ -1,17 +1,13 @@
+// server/controllers/user.controller.js
 import User from '../models/user.model.js';
 
 const create = async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
-    return res.status(201).json({
-      message: 'User successfully created',
-    });
+    return res.status(201).json({ message: 'User successfully created' });
   } catch (err) {
-    console.error(err);
-    return res.status(400).json({
-      error: err.message || 'An error occurred while creating the user',
-    });
+    return res.status(400).json({ error: err.message || 'Could not create user' });
   }
 };
 
@@ -20,31 +16,23 @@ const list = async (req, res) => {
     let users = await User.find().select('name email created');
     res.json(users);
   } catch (err) {
-    return res.status(400).json({
-      error: 'Could not retrieve users',
-    });
+    return res.status(400).json({ error: 'Could not retrieve users' });
   }
 };
 
 const userByID = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
-    if (!user)
-      return res.status(404).json({
-        error: 'User not found',
-      });
+    if (!user) return res.status(404).json({ error: 'User not found' });
     req.profile = user;
     next();
   } catch (err) {
-    return res.status(400).json({
-      error: 'Could not retrieve user',
-    });
+    return res.status(400).json({ error: 'Could not retrieve user' });
   }
 };
 
 const read = (req, res) => {
   req.profile.password = undefined;
-  req.profile.__v = undefined;
   return res.json(req.profile);
 };
 
@@ -57,9 +45,7 @@ const update = async (req, res) => {
     user.password = undefined;
     res.json(user);
   } catch (err) {
-    return res.status(400).json({
-      error: 'Could not update user',
-    });
+    return res.status(400).json({ error: 'Could not update user' });
   }
 };
 
@@ -67,13 +53,9 @@ const remove = async (req, res) => {
   try {
     let user = req.profile;
     await user.deleteOne();
-    res.json({
-      message: 'User deleted successfully',
-    });
+    res.json({ message: 'User deleted successfully' });
   } catch (err) {
-    return res.status(400).json({
-      error: 'Could not delete user',
-    });
+    return res.status(400).json({ error: 'Could not delete user' });
   }
 };
 
@@ -86,5 +68,3 @@ const hasAuthorization = (req, res, next) => {
 };
 
 export default { create, list, userByID, read, update, remove, hasAuthorization };
-
-

@@ -1,3 +1,4 @@
+// server/routes/survey.routes.js
 import express from 'express';
 import surveyCtrl from '../controllers/survey.controller.js';
 import authCtrl from '../controllers/auth.controller.js';
@@ -8,15 +9,10 @@ router.route('/')
   .get(surveyCtrl.list)
   .post(authCtrl.requireSignin, surveyCtrl.create);
 
-  router.route('/:surveyId')
+router.route('/:surveyId')
   .get(surveyCtrl.read)
-  // .put(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.update)
-  .put(surveyCtrl.update)
-
-
-  // .delete(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.remove);
-  .delete(surveyCtrl.remove);
-
+  .put(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.update)
+  .delete(authCtrl.requireSignin, surveyCtrl.hasAuthorization, surveyCtrl.remove);
 
 router.param('surveyId', surveyCtrl.surveyByID);
 

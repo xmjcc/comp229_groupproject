@@ -1,72 +1,24 @@
+// client/src/components/Signup.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,}$/;
-    return passwordRegex.test(password);
-  };
-
   const handleSubmit = async(e) => {
     e.preventDefault();
-    let valid = true;
-
-    // temporalily remove to reduce complexcity
-
-    // if (!validateEmail(email)) {
-    //   setEmailError('Please enter a valid email address.');
-    //   valid = false;
-    // } else {
-    //   setEmailError('');
-    // }
-
-    // if (!validatePassword(password)) {
-    //   setPasswordError(
-    //     'Password must be at least 8 characters long and include an uppercase letter, a number, and a special character (!@#$%^&*).'
-    //   );
-    //   valid = false;
-    // } else {
-    //   setPasswordError('');
-    // }
-    if (valid) {
-      console.log('Form submitted:', { email, password });
+    try {
+      await axios.post('/api/users', { email, password });
+      navigate('/signin');
+    } catch (err) {
+      setError(err.response ? err.response.data.error : 'Could not sign up');
     }
-
-    // added my benjamin wang Dec. 05
-        try {
-          // Make a POST request to the server for the server to create a new user
-          const response = await axios.post('/api/users', {
-            email: email,
-            password: password,
-          });
-
-        console.log("sign up succefully and return to sign in page")    
-          // Redirect to the dashboard or home page
-          navigate('/signin'); // Redirect to dashboard
-        } catch (err) {
-          // Handle error: invalid credentials or other issues
-          setError(err.response ? err.response.data.error : err.message || 'Could not sign in');
-
-        }
-
-        
-      };
-
+  };
 
   return (
     <div className="auth-page">
@@ -79,31 +31,14 @@ const Signup = () => {
 
       <section className="auth-form-container">
         <form onSubmit={handleSubmit} className="auth-form">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your email"
-          />
-          {emailError && <p className="error-message">{emailError}</p>}
+          <label>Email</label>
+          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+          <label>Password</label>
+          <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required />
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your password"
-          />
-          {passwordError && <p className="error-message">{passwordError}</p>}
-
+          {error && <p className="error-message">{error}</p>}
           <button type="submit" className="btn">Sign Up</button>
         </form>
-
         <p className="auth-switch">
           Already have an account? <Link to="/signin">Sign In</Link>
         </p>
@@ -115,6 +50,5 @@ const Signup = () => {
     </div>
   );
 };
-
 
 export default Signup;

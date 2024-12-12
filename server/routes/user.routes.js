@@ -1,3 +1,4 @@
+// server/routes/user.routes.js
 import express from 'express';
 import userCtrl from '../controllers/user.controller.js';
 import authCtrl from '../controllers/auth.controller.js';
@@ -9,16 +10,9 @@ router.route('/')
   .post(userCtrl.create);
 
 router.route('/:userId')
-  // .get(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.read)
-  // .put(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.update)
-  // .delete(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.remove);
-  .get(userCtrl.read)
-  .put(userCtrl.update)
-  .delete(userCtrl.remove);
-
-
-
-
+  .get(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.read)
+  .put(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.update)
+  .delete(authCtrl.requireSignin, userCtrl.hasAuthorization, userCtrl.remove);
 
 router.param('userId', userCtrl.userByID);
 
