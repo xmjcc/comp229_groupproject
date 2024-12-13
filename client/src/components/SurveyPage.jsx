@@ -1,54 +1,58 @@
-// client/src/components/SurveyPage.jsx
-import { Link } from 'react-router-dom';
-import '../styles/SurveyPage.css';
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SurveyPage = () => {
-  const [surveys, setSurveys] = useState([]);
-  const [error, setError] = useState(null);
+    const [surveys, setSurveys] = useState([]);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get('/api/surveys');
-      setSurveys(res.data);
-    } catch (err) {
-      setError(err.response ? err.response.data.error : 'Could not fetch surveys');
-    }
+    const fetchData = async () => {
+      try {
+          const res = await axios.get('/api/surveys');
+          console.log(res.data);  // Check what data is received
+          setSurveys(res.data);
+      } catch (err) {
+          console.error('Error fetching surveys:', err);
+          setError(err.response ? err.response.data.error : 'Could not fetch surveys');
+      }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+    useEffect(() => {
+        fetchData();
+    }, []);
 
-  return (
-    <div className="survey-page">
-      <header className="survey-header">
-        <Link to="/" className="logo">
-          <img src="/assets/Logo.png" alt="Site Logo" />
-          <h1>SoftDev</h1>
-        </Link>
-      </header>
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`/api/surveys/${id}`);
+            fetchData(); // Refresh the list after deleting
+        } catch (err) {
+            setError('Failed to delete the survey');
+        }
+    };
 
-      <section className="survey-list-container">
-        <h2>Explore Surveys</h2>
-        <p>Choose a survey to participate in or view the results.</p>
-        <div className="survey-list">
-          {surveys.map((survey) => (
-            <div key={survey._id} className="survey-card">
-              <h3>{survey.title}</h3>
-              <p>{survey.description}</p>
-              <Link to={`/surveys/${survey._id}`} className="btn">Take Survey</Link>
-            </div>
-          ))}
-        </div>
-        {error && <p style={{color:'red'}}>{error}</p>}
-      </section>
+    const handleEdit = (id) => {
+        navigate(`/surveys/edit/${id}`); // Assuming you have a route set up for editing
+    };
 
-      <footer className="footer">
-        <p>© 2024 SoftDev. All rights reserved.</p>
-      </footer>
-    </div>
+    return (
+      <div className="survey-page">
+          <h2>Explore Surveys</h2>
+          {surveys.length ? (
+              <div className="survey-list">
+                  {surveys.map((survey) => (
+                      <div key={survey._id} className="survey-card">
+                          <h3>{survey.title}</h3>
+                          <p>{survey.description}</p>
+                          <Link to={`/surveys/${survey._id}`} className="btn">Take Survey</Link>
+                      </div>
+                  ))}
+              </div>
+          ) : (
+              <p>No surveys found or error in fetching surveys.</p>  // Ensure this line is not always true
+          )}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
   );
 };
 
