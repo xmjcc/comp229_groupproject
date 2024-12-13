@@ -6,7 +6,10 @@ const router = express.Router();
 
 router.route('/')
   .get(surveyCtrl.list)
-  .post(authCtrl.requireSignin, surveyCtrl.create);
+  // .post(authCtrl.requireSignin, surveyCtrl.create);
+
+  .post(surveyCtrl.create);
+  // .post(authCtrl.requireSignin, surveyCtrl.create);
 
   router.route('/:surveyId')
   .get(surveyCtrl.read)

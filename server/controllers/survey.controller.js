@@ -3,9 +3,9 @@ import Survey from '../models/survey.model.js';
 const create = async (req, res) => {
   const survey = new Survey(req.body);
 
-  console.log('mytest2',req.auth._id);
-  // console.log("Type of req.auth._id:", typeof req.auth._id);
-  survey.createdBy = req.auth._id;
+  // console.log('mytest2',req.auth._id);
+  // // console.log("Type of req.auth._id:", typeof req.auth._id);
+  // survey.createdBy = req.auth._id;
    
   try {
     
