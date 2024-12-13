@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/SurveyPage.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 
 // const surveys = [
@@ -19,6 +20,7 @@ const SurveyPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -30,6 +32,20 @@ const SurveyPage = () => {
       setIsLoading(false);
     }
   };
+
+  const deleteSurvey = async (id) => {
+    try {
+      await axios.delete(`/api/surveys/${id}`);
+      fetchData(); // Refresh the surveys list
+
+      // console.log("my test");
+      // setSurveys((prevSurveys) => prevSurveys.filter((survey) => survey.id !== id));
+    } catch (err) {
+      setError(err.response ? err.response.data.error : err.message || 'Could not delete survey');
+    }
+  };
+
+
 
   useEffect(() => {
     fetchData();
@@ -50,15 +66,31 @@ const SurveyPage = () => {
         <h2>Explore Surveys</h2>
         <p>Choose a survey to participate in or view the results.</p>
         <div className="survey-list">
-          {surveys.map((survey) => (
-            <div key={survey.id} className="survey-card">
-              <h3>{survey.title}</h3>
-              <p>{survey.description}</p>
-              <Link to={`/surveys/${survey.id}`} className="btn">Take Survey</Link>
-            </div>
-          ))}
+          {surveys.map((survey) => {
+            console.log('Survey:', survey);  // Debugging
+            return (
+              <div key={survey.id} className="survey-card">
+                <h3>{survey.title}</h3>
+                <p>{survey.description}</p>
+                <button
+                  className="btn delete-btn"
+                  onClick={() => deleteSurvey(survey._id)}
+                 
+                >
+                  Delete Survey
+                </button>
+                <p></p> 
+                <Link to={`/viewsurvey/${survey._id}`} className="btn">
+                View Survey
+              </Link>
+
+
+              </div>
+            );
+          })}
         </div>
       </section>
+
 
       <footer className="footer">
         <p>© 2024 SoftDev. All rights reserved.</p>

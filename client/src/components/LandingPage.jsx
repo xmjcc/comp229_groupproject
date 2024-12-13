@@ -27,6 +27,7 @@ const LandingPage = () => {
         <h2>Welcome to SoftDev!</h2>
         <p>Your one-stop platform to create, share, and analyze surveys with ease.</p>
         <Link to="/surveys" className="btn">Explore Surveys</Link>
+
       </section>
 
       {/* Features Section */}
@@ -34,7 +35,10 @@ const LandingPage = () => {
         <h3>What We Offer</h3>
         <div className="features-list">
           <div className="feature">
-            <h4>Create Surveys</h4>
+          <Link to="/createsurvey" className="btn"><h4>Create Surveys</h4></Link>
+
+
+            
             <p>Design surveys tailored to your needs in minutes.</p>
           </div>
           <div className="feature">

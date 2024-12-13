@@ -91,3 +91,144 @@
     background-color: #0056b3;
   }
   
+
+
+  .create-survey-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f9fc;
+    padding: 20px;
+  }
+  
+  /* .create-survey-header .logo {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+   */
+  .create-survey-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+  }
+  
+  .create-survey-form {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .create-survey-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .create-survey-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .create-survey-form input,
+  .create-survey-form textarea,
+  .create-survey-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .create-survey-form .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  .create-survey-form .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .create-survey-form .error-message,
+  .create-survey-form .success-message {
+    text-align: center;
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+
+  .delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: darkred; /* Change background color on hover */
+    transform: scale(1.05);    /* Optional: Add a scaling effect */
+  }
+
+
+  /* Make the body cover the whole viewport and remove any default margin */
+
+  /* Center the entire view-survey page */
+/* Centering the survey div */
+.survey-questions {
+  background-color: white; /* Optional: Add a background to the survey */
+  padding: 20px; /* Optional: Add padding */
+  border-radius: 8px; /* Optional: Add border-radius */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+  width: 100%;
+  max-width: 600px; /* Optional: Set a maximum width */
+  justify-content: center; /* Center horizontally */
+}
+
+/* Style for the question text */
+.survey-questions h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.question {
+  margin-bottom: 15px;
+}
+
+.question p {
+  margin: 5px 0;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  list-style-type: disc;
+}
+
+/* Ensure the body takes up the full height */
+body1 {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  /* align-items: center; Center vertically */
+}

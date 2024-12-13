@@ -57,7 +57,7 @@ const Signup = () => {
 
         console.log("sign up succefully and return to sign in page")    
           // Redirect to the dashboard or home page
-          navigate('/signin'); // Redirect to dashboard
+          navigate('/'); // Redirect to dashboard
         } catch (err) {
           // Handle error: invalid credentials or other issues
           setError(err.response ? err.response.data.error : err.message || 'Could not sign in');
